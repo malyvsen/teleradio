@@ -1,19 +1,10 @@
-import os
+import config
+
 from wit import Wit
 from tts import say
 
 
-# environment variables
-wit_key_env = 'WIT_KEY'
-
-
-# initialization
-if wit_key_env not in os.environ:
-    print('Create environment variable ' + wit_key_env + ' to store your Wit.ai server access token')
-    exit()
-
-wit_key = os.environ[wit_key_env]
-wit_client = Wit(wit_key)
+wit_client = Wit(config.wit_key)
 
 
 # message handling

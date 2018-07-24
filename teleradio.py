@@ -12,7 +12,7 @@ intent_handlers = {
 
 
 r = sr.Recognizer()
-with sr.Microphone() as source:
+with sr.Microphone(sample_rate = 48000) as source:
     print('teleradio: calibrating noise level')
     r.adjust_for_ambient_noise(source)
     print('teleradio: energy threshold at ' + str(r.energy_threshold))

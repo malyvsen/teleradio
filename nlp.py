@@ -1,5 +1,6 @@
 import os
 from wit import Wit
+from tts import say
 
 
 # environment variables
@@ -16,19 +17,19 @@ wit_client = Wit(wit_key)
 
 
 # message handling
-def handle_audio(audio, tts, intent_handlers):
+def handle_audio(audio, intent_handlers):
     wit_response = wit_client.speech(audio_file = audio, verbose = None, headers = {'Content-Type': 'audio/wav'})
     entities = wit_response['entities']
     intent = top_confidence(entities, entity_name = 'intent', min_confidence = .9)
     if intent is None:
         print('teleradio warning: intent unclear')
-        tts.say('Intent unclear. Please repeat or phrase your request differently.')
+        say('Intent unclear. Please repeat or phrase your request differently.')
         return
     if intent not in intent_handlers:
         print('teleradio warning: intent handler not provided')
-        tts.say('No handler provided for intent: ' + intent)
+        say('No handler provided for intent: ' + intent)
         return
-    intent_handlers[intent](text = text, entities = entities, tts = tts)
+    intent_handlers[intent](text = text, entities = entities)
 
 
 def confidence_order(entities, entity_name):

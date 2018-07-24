@@ -17,4 +17,4 @@ with sr.Microphone() as source:
         # obtain audio from the microphone
         print('teleradio: listening for speech')
         audio = r.listen(source)
-        nlp.handle_audio(audio = audio.get_wav_data(), tts = , intent_handlers = intent_handlers)
+        nlp.handle_audio(audio = audio.get_wav_data(), intent_handlers = intent_handlers)

@@ -1,6 +1,18 @@
+import os
+
+
 wit_key = None
 
-wit_key_path = 'config/wit_key'
+config_dir = 'config/'
+wit_key_path = config_dir + 'wit_key'
+
+
+try:
+    os.makedirs(config_dir)
+except OSError:
+    pass
+
+
 try:
     with open(wit_key_path, 'r') as wit_key_file:
         wit_key = wit_key_file.read()

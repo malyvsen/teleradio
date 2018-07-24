@@ -2,7 +2,8 @@ import subprocess
 
 
 def say(text):
-    subprocess.call(('mimic', '-t', f"'{text}'"))
+    # subprocess.call(('mimic', '-t', f"'{text}'"))
+    print('teleradio: finished talking')
 
 
 if __name__ == '__main__':

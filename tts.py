@@ -2,7 +2,7 @@ import subprocess
 
 
 def say(text):
-    # subprocess.call(('mimic', '-t', f"'{text}'"))
+    subprocess.call(('mimic', '-t', '\'' + text + '\''))
     print('teleradio: finished talking')
 
 

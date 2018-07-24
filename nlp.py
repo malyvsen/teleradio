@@ -29,7 +29,7 @@ def handle_audio(audio, intent_handlers):
         print('teleradio warning: intent handler not provided')
         say('No handler provided for intent: ' + intent)
         return
-    intent_handlers[intent](text = text, entities = entities)
+    intent_handlers[intent](text = wit_response['_text'], entities = entities)
 
 
 def confidence_order(entities, entity_name):

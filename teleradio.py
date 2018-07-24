@@ -1,3 +1,5 @@
+from io import BytesIO
+
 import speech_recognition as sr
 import nlp
 
@@ -20,10 +22,6 @@ with sr.Microphone(sample_rate = 48000) as source:
         # obtain audio from the microphone
         print('teleradio: listening for speech')
         audio = r.listen(source)
-        wav_file_path = '/tmp/teleradio.wav'
-        with open(wav_file_path, 'wb') as file:
-            print('teleradio: writing to file')
-            file.write(audio.get_wav_data())
-        with open(wav_file_path, 'rb') as file:
-            print('teleradio: processing speech')
-            nlp.handle_audio(audio = file, intent_handlers = intent_handlers)
+        print('teleradio: processing speech')
+        audio_bytes = BytesIO(audio.get_wav_data())
+        nlp.handle_audio(audio = audio_bytes, intent_handlers = intent_handlers)

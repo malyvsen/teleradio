@@ -15,7 +15,7 @@ r = sr.Recognizer()
 with sr.Microphone() as source:
     print('teleradio: calibrating noise level')
     r.adjust_for_ambient_noise(source)
-    print(f'teleradio: energy threshold at {r.energy_threshold}')
+    print('teleradio: energy threshold at ' + str(r.energy_threshold))
     while True:
         # obtain audio from the microphone
         print('teleradio: listening for speech')

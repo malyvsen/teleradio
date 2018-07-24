@@ -18,7 +18,7 @@ wit_client = Wit(wit_key)
 
 # message handling
 def handle_audio(audio, intent_handlers):
-    wit_response = wit_client.speech(audio_file = audio, verbose = None, headers = {'Content-Type': 'audio/wav'})
+    wit_response = wit_client.speech(audio_file = audio, headers = {'Content-Type': 'audio/wav'})
     entities = wit_response['entities']
     intent = top_confidence(entities, entity_name = 'intent', min_confidence = .9)
     if intent is None:

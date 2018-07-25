@@ -17,7 +17,7 @@ def handle_audio(audio):
     except WitError:
         dump_path = '/tmp/teleradio_error.wav'
         read_audio = audio.read()
-        log.error('wit error, dumping ' + len(read_audio) + ' bytes of audio to ' + dump_path)
+        log.error('wit error, dumping ' + str(len(read_audio)) + ' bytes of audio to ' + dump_path)
         with open(dump_path, 'wb') as dump_file:
             dump_file.write(read_audio)
         return

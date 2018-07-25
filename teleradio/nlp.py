@@ -1,7 +1,9 @@
-import config
-
 from wit import Wit
-from tts import say
+
+from teleradio import log
+from teleradio.tts import say
+from teleradio import config
+from teleradio import handlers
 
 
 wit_client = Wit(config.wit_key)
@@ -13,15 +15,15 @@ def handle_audio(audio, intent_handlers):
     entities = wit_response['entities']
     intent = top_confidence(entities, entity_name = 'intent', min_confidence = .9)
     if intent is None:
-        print('teleradio warning: intent unclear')
+        log.warning('intent unclear')
         say('Intent unclear. Please repeat or phrase your request differently.')
         return
-    if intent not in intent_handlers:
-        print('teleradio warning: intent handler not provided')
+    if not hasattr(handlers, intent):
+        log.error('intent handler not provided')
         say('No handler provided for intent: ' + intent)
         return
-    print('teleradio: handling intent ' + intent)
-    intent_handlers[intent](text = wit_response['_text'], entities = entities)
+    log.update('handling intent ' + intent)
+    getattr(hanlders, intent)(text = wit_response['_text'], entities = entities)
 
 
 def confidence_order(entities, entity_name):

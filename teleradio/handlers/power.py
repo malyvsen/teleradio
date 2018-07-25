@@ -1,11 +1,12 @@
 import os
-import nlp
-from tts import say
+
+from teleradio import log
+from teleradio.tts import say
 
 
 def shutdown(text, entities):
     say('Shutting down')
-    os.system('shutdown now')
+    os.system('shutdown -h now')
 
 
 def reboot(text, entities):

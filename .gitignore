@@ -105,4 +105,4 @@ venv.bak/
 
 
 # teleradio project-specific
-config/
+*key

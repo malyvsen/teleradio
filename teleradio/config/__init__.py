@@ -1,8 +1,11 @@
 import os
 
 
+config_dir = os.path.dirname(__file__)
+
+
 wit_key = None
-wit_key_path = 'wit_key'
+wit_key_path = os.path.join(config_dir, 'wit_key')
 
 try:
     with open(wit_key_path, 'r') as wit_key_file:

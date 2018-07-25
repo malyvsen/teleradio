@@ -1,4 +1,5 @@
 from wit import Wit
+from wit.wit import WitError
 
 from teleradio import log
 from teleradio.tts import say
@@ -11,7 +12,14 @@ wit_client = Wit(config.wit_key)
 
 # message handling
 def handle_audio(audio):
-    wit_response = wit_client.speech(audio_file = audio, headers = {'Content-Type': 'audio/wav'})
+    try:
+        wit_response = wit_client.speech(audio_file = audio, headers = {'Content-Type': 'audio/wav'})
+    except wit.wit.WitError:
+        dump_path = '/tmp/teleradio_error.wav'
+        log.error('wit error, dumping audio to ' + dump_path)
+        with open(dump_path, 'wb') as dump_file:
+            dump_file.write(audio)
+        return
     entities = wit_response['entities']
     intent = top_confidence(entities, entity_name = 'intent', min_confidence = .9)
     if intent is None:

@@ -14,7 +14,7 @@ wit_client = Wit(config.wit_key)
 def handle_audio(audio):
     try:
         wit_response = wit_client.speech(audio_file = audio, headers = {'Content-Type': 'audio/wav'})
-    except wit.wit.WitError:
+    except WitError:
         dump_path = '/tmp/teleradio_error.wav'
         log.error('wit error, dumping audio to ' + dump_path)
         with open(dump_path, 'wb') as dump_file:

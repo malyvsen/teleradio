@@ -16,9 +16,10 @@ def handle_audio(audio):
         wit_response = wit_client.speech(audio_file = audio, headers = {'Content-Type': 'audio/wav'})
     except WitError:
         dump_path = '/tmp/teleradio_error.wav'
-        log.error('wit error, dumping ' + len(audio) + ' bytes of audio to ' + dump_path)
+        read_audio = audio.read()
+        log.error('wit error, dumping ' + len(read_audio) + ' bytes of audio to ' + dump_path)
         with open(dump_path, 'wb') as dump_file:
-            dump_file.write(audio.read())
+            dump_file.write(read_audio)
         return
     entities = wit_response['entities']
     intent = top_confidence(entities, entity_name = 'intent', min_confidence = .9)

@@ -5,12 +5,15 @@ import nlp
 
 from light import light_set
 from music import music_play, music_stop
+from power import shutdown, reboot
 
 
 intent_handlers = {
 'light_set': light_set,
 'music_play': music_play,
-'music_stop': music_stop}
+'music_stop': music_stop,
+'shutdown': shutdown,
+'reboot': reboot}
 
 
 r = sr.Recognizer()
